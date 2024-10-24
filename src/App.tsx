@@ -36,6 +36,7 @@ import "./index.css";
 import { Fragment, useState } from "react";
 import { AuthProvider, authContext } from "./context/auth/AuthContext";
 import UnlockWallet from "./pages/auth/UnlockWallet";
+import CreateNFT from './pages/createNFT/CreateNFT';
 
 setupIonicReact();
 
@@ -46,20 +47,23 @@ const App: React.FC = () => (
         <AuthProvider>
           <authContext.Consumer>
             {(ctx) => {
-              if (!ctx?.wallet) {
-                return (
-                  <Route exact path="/">
-                    <UnlockWallet />
-                  </Route>
-                );
-              }
+              // if (!ctx?.wallet) {
+              //   return (
+              //     <Route exact path="/">
+              //       <UnlockWallet />
+              //     </Route>
+              //   );
+              // }
               return (
                 <Fragment>
+                  <Route exact path="/">
+                    <Redirect to="/home" />
+                  </Route>
                   <Route exact path="/home">
                     <Home />
                   </Route>
-                  <Route exact path="/">
-                    <Redirect to="/home" />
+                  <Route exact path="/create-nft">
+                    <CreateNFT />
                   </Route>
                 </Fragment>
               );

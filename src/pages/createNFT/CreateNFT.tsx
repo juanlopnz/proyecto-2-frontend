@@ -1,8 +1,12 @@
-import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from "@ionic/react";
+import { Camera, CameraResultType, CameraSource } from "@capacitor/camera";
+import { IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar, useIonRouter } from "@ionic/react";
 import { arrowBack, personCircleOutline } from "ionicons/icons";
 import { useState } from "react";
+import useImageMethods from "../../hooks/useImageMethods";
 
 const CreateNFT = () => {
+  const router = useIonRouter();
+  const {selectedImage, openGallery} = useImageMethods();
   const [nftData, setNftData] = useState<NFT>({
     name: "",
     category: "",
@@ -12,12 +16,15 @@ const CreateNFT = () => {
     isSold: false,
     owner: ""
   })
+
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton>
+            <IonButton
+              onClick={() => router.goBack()}
+            >
               <IonIcon
                 icon={arrowBack} size='large'
               />
@@ -27,13 +34,13 @@ const CreateNFT = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <div className='flex flex-col w-full justify-center items-center gap-2'>
-          <IonButton
-            expand='block'
-            fill='outline'
-            color='primary'
-            className='w-full'
-          />
+        <div className='flex flex-col w-full justify-center items-center gap-2 p-2'>
+          <button
+            className='bg-blue-800 text-white py-1 rounded-full w-full'
+            onClick={openGallery}
+          >
+            Seleccionar Imagen
+          </button>
         </div>
       </IonContent>
     </IonPage>
