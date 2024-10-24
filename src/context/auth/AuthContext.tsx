@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import { AuthContextType } from "./types";
-import { Wallet } from "ethers";
+import { HDNodeWallet, Wallet } from "ethers";
 
 export const authContext = createContext<AuthContextType | null>(null);
 
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const AuthProvider = ({ children }: Props) => {
-  const [wallet, setWallet] = useState<Wallet>();
+  const [wallet, setWallet] = useState<Wallet | HDNodeWallet>();
   const [walletFile, setWalletFile] = useState<string | undefined>(
     localStorage.getItem("wallet") || undefined
   );
