@@ -4,21 +4,25 @@ import './Home.css';
 
 const Home: React.FC = () => {
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
+    // <IonPage>
+    //   <IonHeader>
+    //     <IonToolbar>
+    //       <IonTitle>Buenos días</IonTitle>
+    //     </IonToolbar>
+    //   </IonHeader>
+    //   <IonContent fullscreen>
+    //     <IonHeader collapse="condense">
+    //       <IonToolbar>
+    //         <IonTitle size="large">Blank</IonTitle>
+    //       </IonToolbar>
+    //     </IonHeader>
+    //     <ExploreContainer />
+    //   </IonContent>
+    // </IonPage>
+    <div>
+      <h1 className='font-mono text-blue-600'>Home</h1>
+      <p>This is the Home page.</p>
+    </div>
   );
 };
 
