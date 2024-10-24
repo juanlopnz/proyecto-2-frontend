@@ -6,7 +6,8 @@ import useImageMethods from "../../hooks/useImageMethods";
 
 const CreateNFT = () => {
   const router = useIonRouter();
-  const {selectedImage, openGallery} = useImageMethods();
+  const { selectedImage, openGallery } = useImageMethods();
+
   const [nftData, setNftData] = useState<NFT>({
     name: "",
     category: "",
@@ -41,6 +42,9 @@ const CreateNFT = () => {
           >
             Seleccionar Imagen
           </button>
+          {selectedImage && (
+            <img src={selectedImage} alt="selected" className="w-full h-60 object-cover rounded-lg" />
+          )}
         </div>
       </IonContent>
     </IonPage>

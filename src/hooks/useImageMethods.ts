@@ -7,13 +7,13 @@ const useImageMethods = () => {
   const openGallery = async () => {
     try {
       const image = await Camera.getPhoto({
-        resultType: CameraResultType.Base64, 
+        resultType: CameraResultType.DataUrl, 
         source: CameraSource.Photos, 
         quality: 100,
         allowEditing: false,
         promptLabelHeader: "Selecciona una imagen o video",
       });
-      setSelectedImage(image.base64String!); 
+      setSelectedImage(image.dataUrl); 
     } catch (error) {
       console.error("Error al seleccionar la imagen:", error);
     }
