@@ -1,27 +1,28 @@
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import ExploreContainer from '../components/ExploreContainer';
 import './Home.css';
 
-const router = useIonRouter();
-
 const Home: React.FC = () => {
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Buenos días</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-        <IonButton color={'primary'}>Login</IonButton>
-      </IonContent>
-    </IonPage>
+    // <IonPage>
+    //   <IonHeader>
+    //     <IonToolbar>
+    //       <IonTitle>Buenos días</IonTitle>
+    //     </IonToolbar>
+    //   </IonHeader>
+    //   <IonContent fullscreen>
+    //     <IonHeader collapse="condense">
+    //       <IonToolbar>
+    //         <IonTitle size="large">Blank</IonTitle>
+    //       </IonToolbar>
+    //     </IonHeader>
+    //     <ExploreContainer />
+    //   </IonContent>
+    // </IonPage>
+    <div>
+      <h1 className='font-mono text-blue-600'>Home</h1>
+      <p>This is the Home page.</p>
+    </div>
   );
 };
 
