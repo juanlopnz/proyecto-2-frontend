@@ -47,13 +47,13 @@ const App: React.FC = () => (
         <AuthProvider>
           <authContext.Consumer>
             {(ctx) => {
-              // if (!ctx?.wallet) {
-              //   return (
-              //     <Route exact path="/">
-              //       <UnlockWallet />
-              //     </Route>
-              //   );
-              // }
+              if (!ctx?.wallet) {
+                return (
+                  <Route exact path="/">
+                    <UnlockWallet />
+                  </Route>
+                );
+              }
               return (
                 <Fragment>
                   <Route exact path="/">
