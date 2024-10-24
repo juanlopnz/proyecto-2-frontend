@@ -3,8 +3,8 @@ import { add, arrowDown, arrowUp, personCircleOutline, trashBinOutline } from "i
 import { useState } from 'react';
 import { nftListTemp } from './utils';
 import NftCard from '../../components/NFT/NftCard';
-import Modal from '../../components/Base/Modal';
 import AnotherNFTModal from '../../components/NFT/AnotherNFTModal';
+import { NFT } from '../../types';
 
 const options = [
   { value: "name", label: "Nombre" },
@@ -95,7 +95,7 @@ const Home: React.FC = () => {
         <AnotherNFTModal
           isModalOpen={isModalOpen}
           setIsModalOpen={setIsModalOpen}
-          selectedNFT={selectedNFT}
+          selectedNFT={selectedNFT!}
         />
       </IonContent>
     </IonPage>

@@ -1,10 +1,12 @@
+import { NFT, SaleType } from "../../types";
+
 export const nftListTemp: NFT[] = [
   {
     name: "Golden Dragon",
     category: "Art",
     price: 1500,
     image: "https://example.com/golden-dragon.jpg",
-    saleType: "Auction",
+    saleType: SaleType.Fixed,
     isSold: false,
     owner: "Alice"
   },
@@ -13,7 +15,7 @@ export const nftListTemp: NFT[] = [
     category: "Collectible",
     price: 500,
     image: "https://example.com/crypto-kitty.jpg",
-    saleType: "Fixed",
+    saleType: SaleType.Fixed,
     isSold: true,
     owner: "Bob"
   },
@@ -22,7 +24,7 @@ export const nftListTemp: NFT[] = [
     category: "Real Estate",
     price: 3000,
     image: "https://example.com/virtual-land.jpg",
-    saleType: "Auction",
+    saleType: SaleType.Auction,
     isSold: false,
     owner: "Carol"
   },
@@ -31,7 +33,7 @@ export const nftListTemp: NFT[] = [
     category: "Art",
     price: 2000,
     image: "https://example.com/pixel-ape.jpg",
-    saleType: "Fixed",
+    saleType: SaleType.Fixed,
     isSold: true,
     owner: "Dave"
   },
@@ -40,7 +42,7 @@ export const nftListTemp: NFT[] = [
     category: "Real Estate",
     price: 8000,
     image: "https://example.com/metaverse-villa.jpg",
-    saleType: "Auction",
+    saleType: SaleType.Auction,
     isSold: false,
     owner: "Eve"
   }
