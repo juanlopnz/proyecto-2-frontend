@@ -1,4 +1,5 @@
 import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from "@ionic/react";
+import { NFT } from "../../types";
 
 type Props = {
   nft: NFT;
