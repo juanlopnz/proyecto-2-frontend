@@ -1,10 +1,11 @@
-import { IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonPage, IonSearchbar, IonSelect, IonSelectOption, IonTitle, IonToolbar, useIonRouter } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonNavLink, IonPage, IonSearchbar, IonSelect, IonSelectOption, IonTitle, IonToolbar, useIonRouter} from '@ionic/react';
 import { add, arrowDown, arrowUp, personCircleOutline, trashBinOutline } from "ionicons/icons";
 import { useState } from 'react';
 import { nftListTemp } from './utils';
 import NftCard from '../../components/NFT/NftCard';
 import AnotherNFTModal from '../../components/NFT/AnotherNFTModal';
 import { NFT } from '../../types';
+import SingleNFT from './SingleNFT';
 
 const options = [
   { value: "name", label: "Nombre" },
@@ -71,12 +72,10 @@ const Home: React.FC = () => {
           {nftList.map((nft, index) => (
             <div
               key={index}
-              onClick={
-                () => {
-                  setSelectedNFT(nft);
-                  setIsModalOpen(true);
-                }
-              }>
+              onClick={() => {
+                router.push(`/nft/${nft.id}`);
+              }}
+            > 
               <NftCard
                 nft={nft}
               />

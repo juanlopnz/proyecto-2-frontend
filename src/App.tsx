@@ -33,10 +33,11 @@ import "@ionic/react/css/palettes/dark.system.css";
 /* Theme variables */
 import "./theme/variables.css";
 import "./index.css";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { AuthProvider, authContext } from "./context/auth/AuthContext";
 import UnlockWallet from "./pages/auth/UnlockWallet";
 import CreateNFT from './pages/createNFT/CreateNFT';
+import SingleNFT from './pages/home/SingleNFT';
 
 setupIonicReact();
 
@@ -61,6 +62,8 @@ const App: React.FC = () => (
                   </Route>
                   <Route exact path="/home">
                     <Home />
+                  </Route>
+                  <Route exact path="/nft/:id" component={SingleNFT}>
                   </Route>
                   <Route exact path="/create-nft">
                     <CreateNFT />

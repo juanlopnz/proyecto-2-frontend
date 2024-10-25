@@ -43,16 +43,20 @@ const AnotherNFTModal = ({
           <p className="text-lg font-semibold">Precio: ${selectedNFT?.price}</p>
 
           {selectedNFT?.saleType === "Subasta" && (
-            <div className="mt-4 p-4 bg-gray-100 rounded-lg">
+            <div className="flex flex-col gap-2 p-2 bg-gray-100 rounded-lg">
               <p className="text-lg font-semibold text-gray-700">Oferta actual: ${currentBid}</p>
-              <IonInput
+              <input
                 type="number"
                 placeholder="Ingresa tu oferta"
                 value={newBid}
-                onIonChange={(e) => setNewBid(Number(e.detail.value!))}
-                className="my-4 border-2 border-gray-300 rounded-lg p-2"
+                onChange={(e) => setNewBid(Number(e.target.value!))}
+                className="bg-white text-gray-700 border-2 p-1"
               />
-              <button onClick={handlePlaceBid} disabled={newBid <= currentBid}>
+              <button
+                className="bg-blue-800 text-white py-2 px-4 rounded-lg"
+                onClick={handlePlaceBid}
+                disabled={newBid <= currentBid}
+              >
                 Pujar
               </button>
             </div>
