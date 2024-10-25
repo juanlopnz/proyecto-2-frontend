@@ -163,7 +163,9 @@ const CreateNFT = () => {
               />
               <IonIcon
                 icon={addCircle}
-                className={`text-2xl transition-all duration-500 ${tagInput ? "cursor-pointer" : "cursor-not-allowed"}`}
+                className={`text-2xl transition-all duration-500 ${
+                  tagInput ? "cursor-pointer" : "cursor-not-allowed"
+                }`}
                 color={tagInput ? "light" : "medium"}
                 onClick={() => {
                   if (!tagInput) return;
