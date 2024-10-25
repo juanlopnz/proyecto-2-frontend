@@ -31,6 +31,7 @@ const CreateNFT = () => {
   const [tagInput, setTagInput] = useState<string>("");
 
   const [nftData, setNftData] = useState<NFT>({
+    id: "1",
     name: "",
     category: "",
     price: 0,
