@@ -13,16 +13,15 @@ import {
   IonSelect,
   IonSelectOption,
   IonText,
-  IonToast,
   IonToolbar,
   useIonRouter,
   useIonToast,
 } from "@ionic/react";
-import { arrowBack, imageOutline, addCircle, trash } from "ionicons/icons";
+import { addCircle, arrowBack, imageOutline, trash } from "ionicons/icons";
 import { Fragment, useContext, useState } from "react";
+import { authContext } from "../../context/auth/AuthContext";
 import useImageMethods from "../../hooks/useImageMethods";
 import { NFT, SaleType } from "../../types";
-import { authContext } from "../../context/auth/AuthContext";
 
 const CreateNFT = () => {
   const auth = useContext(authContext);
@@ -79,7 +78,10 @@ const CreateNFT = () => {
       </IonHeader>
       <IonContent fullscreen>
         <div className="flex flex-col w-full justify-center items-center gap-2 p-4 overflow-auto">
-          <div className="flex flex-col gap-2 items-center justify-center w-full aspect-square overflow-hidden rounded-md border border-[#5f5f5f]">
+          <div
+            className="flex flex-col gap-2 items-center justify-center w-full aspect-square overflow-hidden rounded-md border border-[#5f5f5f] cursor-pointer"
+            onClick={openGallery}
+          >
             {selectedImage ? (
               <img
                 src={selectedImage}
@@ -87,15 +89,12 @@ const CreateNFT = () => {
                 className="w-full object-cover"
               />
             ) : (
-              <div
-                className="flex flex-col w-full h-full gap-2 items-center justify-center cursor-pointer"
-                onClick={openGallery}
-              >
+              <Fragment>
                 <IonIcon icon={imageOutline} size="large" color="medium" />
                 <IonText class="text-center text-xs" color={"medium"}>
                   Agregar imagen
                 </IonText>
-              </div>
+              </Fragment>
             )}
           </div>
           <div className="flex flex-col w-full py-3 gap-5">
@@ -164,9 +163,10 @@ const CreateNFT = () => {
               />
               <IonIcon
                 icon={addCircle}
-                className="text-2xl cursor-pointer transition-all duration-500"
+                className={`text-2xl transition-all duration-500 ${tagInput ? "cursor-pointer" : "cursor-not-allowed"}`}
                 color={tagInput ? "light" : "medium"}
                 onClick={() => {
+                  if (!tagInput) return;
                   setNftData({
                     ...nftData,
                     tags: [...nftData.tags, tagInput],
