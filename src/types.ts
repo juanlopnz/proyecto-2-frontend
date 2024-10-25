@@ -11,4 +11,5 @@ export type NFT = {
   saleType: SaleType;
   isSold: boolean
   owner: string;
+  tags: string[];
 }
