@@ -38,6 +38,7 @@ import { AuthProvider, authContext } from "./context/auth/AuthContext";
 import UnlockWallet from "./pages/auth/UnlockWallet";
 import CreateNFT from './pages/createNFT/CreateNFT';
 import SingleNFT from './pages/home/SingleNFT';
+import Profile from './pages/profile/Profile';
 
 setupIonicReact();
 
@@ -67,6 +68,9 @@ const App: React.FC = () => (
                   </Route>
                   <Route exact path="/create-nft">
                     <CreateNFT />
+                  </Route>
+                  <Route exact path="/profile">
+                    <Profile />
                   </Route>
                 </Fragment>
               );
