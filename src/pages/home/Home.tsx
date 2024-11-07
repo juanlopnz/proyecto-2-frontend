@@ -21,10 +21,9 @@ import {
 } from "ionicons/icons";
 import { useState } from "react";
 import AnotherNFTModal from "../../components/NFT/AnotherNFTModal";
-import NftCard from "../../components/NFT/NftCard";
 import { NFT } from "../../types";
 import { nftListTemp } from "./utils";
-import NftList from "./components/NftList";
+import NftList from "../../components/NFT/NftList";
 
 const options = [
   { value: "name", label: "Nombre" },

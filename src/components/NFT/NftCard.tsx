@@ -1,36 +1,37 @@
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonText,
-} from "@ionic/react";
 import { NFT } from "../../types";
 
 type Props = {
   nft: NFT;
+  onClick: () => void;
+  showDetails: boolean;
+  onShowDetails?: (nft: NFT) => void;
 };
 
-const NftCard = ({ nft }: Props) => {
+const NftCard = ({ nft, onClick, showDetails, onShowDetails }: Props) => {
   return (
-    <IonCard className="w-full h-full">
+    <div
+      className="flex flex-col items-center justify-center w-full aspect-[9/12] rounded-md overflow-hidden relative"
+      onClick={() => (showDetails ? onShowDetails?.(nft) : onClick())}
+    >
       <img
         alt="Silhouette of mountains"
-        src="https://ionicframework.com/docs/img/demos/card-media.png"
+        src={nft.image}
+        className={`object-cover w-full h-full z-10 transitions-all duration-500 ${
+          showDetails ? "scale-125" : ""
+        }`}
       />
-      <IonCardHeader>
-        <IonCardSubtitle class="text-xs">{nft.owner}</IonCardSubtitle>
-        <IonCardTitle class="text-base">{nft.name}</IonCardTitle>
-      </IonCardHeader>
-      <IonCardContent>
-        <div className="flex flex-col">
-          <IonText className="text-[11px]">{nft.category}</IonText>
-          <IonText className="text-[11px]">{nft.saleType}</IonText>
-          <IonText className="text-[11px]">ETH {nft.price.toLocaleString("es-CO")}</IonText>
+      <div
+        className={`flex flex-col justify-end w-full h-full z-20 backdrop-brightness-75 absolute top-0 left-0 transitions-all duration-500 select-none p-2 gap-1 ${
+          showDetails ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <div className="font-extralight text-xl self-center py-5">Ver más</div>
+        <div>{nft.name}</div>
+        <div className="font-extralight text-xs">
+          ETH {nft.price.toLocaleString("es-CO")}
         </div>
-      </IonCardContent>
-    </IonCard>
+      </div>
+    </div>
   );
 };
 
