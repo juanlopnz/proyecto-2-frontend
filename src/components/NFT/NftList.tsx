@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { NFT } from "../../../types";
 import NftCard from "./NftCard";
+import { NFT } from "../../types";
 
 type Props = {
   items: NFT[];
+  onShowDetails?: (nft: NFT) => void;
 };
 
-const NftList = ({ items }: Props) => {
+const NftList = ({ items, onShowDetails }: Props) => {
   const [selected, setSelected] = useState<number | undefined>();
 
   return (
@@ -17,6 +18,7 @@ const NftList = ({ items }: Props) => {
           nft={item}
           onClick={() => setSelected(index)}
           showDetails={index === selected}
+          onShowDetails={onShowDetails}
         />
       ))}
     </div>

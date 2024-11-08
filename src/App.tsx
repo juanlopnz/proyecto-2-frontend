@@ -39,6 +39,7 @@ import UnlockWallet from "./pages/auth/UnlockWallet";
 import CreateNFT from './pages/createNFT/CreateNFT';
 import SingleNFT from './pages/home/SingleNFT';
 import Profile from './pages/profile/Profile';
+import EditNFT from './pages/editNFT/EditNFT';
 
 setupIonicReact();
 
@@ -72,6 +73,7 @@ const App: React.FC = () => (
                   <Route exact path="/profile">
                     <Profile />
                   </Route>
+                  <Route exact path="/edit-nft/:id" component={EditNFT} />
                 </Fragment>
               );
             }}

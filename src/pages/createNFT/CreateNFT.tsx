@@ -23,6 +23,16 @@ import { authContext } from "../../context/auth/AuthContext";
 import useImageMethods from "../../hooks/useImageMethods";
 import { NFT, SaleType } from "../../types";
 
+const options: { label: string; value: string }[] = [
+  "Arte",
+  "Música",
+  "Fotografía",
+  "Videojuegos",
+  "Deportes",
+  "Coleccionable",
+  "Otros",
+].map((category) => ({ label: category, value: category }));
+
 const CreateNFT = () => {
   const auth = useContext(authContext);
   const router = useIonRouter();
@@ -41,16 +51,6 @@ const CreateNFT = () => {
     owner: auth?.wallet?.address || "",
     tags: [],
   });
-
-  const options: { label: string; value: string }[] = [
-    "Arte",
-    "Música",
-    "Fotografía",
-    "Videojuegos",
-    "Deportes",
-    "Coleccionable",
-    "Otros",
-  ].map((category) => ({ label: category, value: category }));
 
   const handleCreateNFT = () => {
     const nft = { ...nftData, image: selectedImage };
