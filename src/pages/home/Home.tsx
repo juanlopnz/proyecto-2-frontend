@@ -122,7 +122,7 @@ const Home: React.FC = () => {
             />
           </div>
         </div>
-        <NftList items={nftList} />
+        <NftList items={nftList} onShowDetails={(nft) => router.push(`/details/${nft.id}`)} />
         <IonFab horizontal="end" vertical="bottom" slot="fixed">
           <IonFabButton onClick={() => router.push("/create-nft?id=2")}>
             <IonIcon icon={add}></IonIcon>

@@ -40,6 +40,7 @@ import CreateNFT from './pages/createNFT/CreateNFT';
 import SingleNFT from './pages/home/SingleNFT';
 import Profile from './pages/profile/Profile';
 import EditNFT from './pages/editNFT/EditNFT';
+import NftDetails from './pages/nftDetails/NftDetails';
 
 setupIonicReact();
 
@@ -74,6 +75,7 @@ const App: React.FC = () => (
                     <Profile />
                   </Route>
                   <Route exact path="/edit-nft/:id" component={EditNFT} />
+                  <Route exact path="/details/:id" component={NftDetails} />
                 </Fragment>
               );
             }}

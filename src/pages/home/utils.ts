@@ -9,7 +9,7 @@ export const nftListTemp: NFT[] = [
     image: "https://picsum.photos/900/1200?dummy=1",
     saleType: SaleType.Fixed,
     isSold: false,
-    owner: "Alice",
+    owner: "0x7b23e6a7098912e3121a23",
     tags: ["dragon", "gold"]
   },
   {
@@ -20,7 +20,7 @@ export const nftListTemp: NFT[] = [
     image: "https://picsum.photos/900/1200?dummy=2",
     saleType: SaleType.Fixed,
     isSold: true,
-    owner: "Bob",
+    owner: "0x7b23e6a7098912e3121a23",
     tags: ["cat", "crypto"]
   },
   {
@@ -31,7 +31,7 @@ export const nftListTemp: NFT[] = [
     image: "https://picsum.photos/900/1200?dummy=3",
     saleType: SaleType.Auction,
     isSold: false,
-    owner: "Carol",
+    owner: "0x7b23e6a7098912e3121a23",
     tags: ["land", "metaverse"]
   },
   {
@@ -42,7 +42,7 @@ export const nftListTemp: NFT[] = [
     image: "https://picsum.photos/900/1200?dummy=4",
     saleType: SaleType.Fixed,
     isSold: true,
-    owner: "Dave",
+    owner: "0x7b23e6a7098912e3121a23",
     tags: ["ape", "pixel"]
   },
   {
@@ -53,7 +53,7 @@ export const nftListTemp: NFT[] = [
     image: "https://picsum.photos/900/1200?dummy=5",
     saleType: SaleType.Auction,
     isSold: false,
-    owner: "Eve",
+    owner: "0x7b23e6a7098912e3121a23",
     tags: ["villa", "metaverse"]
   }
 ];
