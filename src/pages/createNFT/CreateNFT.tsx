@@ -22,16 +22,8 @@ import { Fragment, useContext, useState } from "react";
 import { authContext } from "../../context/auth/AuthContext";
 import useImageMethods from "../../hooks/useImageMethods";
 import { NFT, SaleType } from "../../types";
-
-const options: { label: string; value: string }[] = [
-  "Arte",
-  "Música",
-  "Fotografía",
-  "Videojuegos",
-  "Deportes",
-  "Coleccionable",
-  "Otros",
-].map((category) => ({ label: category, value: category }));
+import { NftService } from "../../api/nft/nft.service";
+import { options } from "../../utils/constans";
 
 const CreateNFT = () => {
   const auth = useContext(authContext);
@@ -41,29 +33,39 @@ const CreateNFT = () => {
   const [tagInput, setTagInput] = useState<string>("");
 
   const [nftData, setNftData] = useState<NFT>({
-    id: "1",
     name: "",
     category: "",
+    description: "",
     price: 0,
     image: "",
-    saleType: SaleType.Fixed,
+    saleType: SaleType.fixed,
     isSold: false,
     owner: auth?.wallet?.address || "",
     tags: [],
   });
 
-  const handleCreateNFT = () => {
-    const nft = { ...nftData, image: selectedImage };
+  const handleCreateNFT = async () => {
+    const nft = { ...nftData, image: selectedImage! };
     if (
-      Object.values(nft).some(
-        (value) => typeof value !== Boolean.name.toLowerCase() && !value
-      )
+      !nft.name ||
+      !nft.category ||
+      !nft.price ||
+      !nft.image ||
+      !nft.saleType
     ) {
       toast("Por favor, rellene todos los campos", 500);
       return;
     }
-    toast("NFT creado con éxito", 500);
-    return router.push("/home");
+
+    NftService.createNft(nft)
+      .then(() => {
+        toast("NFT creado con éxito", 500);
+        return router.push("/home");
+      })
+      .catch((error) => {
+        console.error(error);
+        toast("Error al crear el NFT", 500);
+      });
   };
 
   return (
@@ -115,10 +117,10 @@ const CreateNFT = () => {
               value={nftData.saleType}
               class="flex justify-around w-full items-center text-sm"
             >
-              <IonRadio value={SaleType.Fixed} color={"medium"}>
+              <IonRadio value={SaleType.fixed} color={"medium"}>
                 Venta
               </IonRadio>
-              <IonRadio value={SaleType.Auction} color={"medium"}>
+              <IonRadio value={SaleType.auction} color={"medium"}>
                 Subasta
               </IonRadio>
             </IonRadioGroup>
@@ -141,9 +143,9 @@ const CreateNFT = () => {
               labelPlacement="floating"
               fill="outline"
               class="text-sm w-full"
-              onIonChange={(e) =>
-                setNftData({ ...nftData, category: e.detail.value })
-              }
+              onIonChange={(e) => {
+                setNftData({ ...nftData, category: e.detail.value });
+              }}
             >
               {options.map((option, index) => (
                 <IonSelectOption key={index} value={option.value}>
@@ -164,9 +166,8 @@ const CreateNFT = () => {
               />
               <IonIcon
                 icon={addCircle}
-                className={`text-2xl transition-all duration-500 ${
-                  tagInput ? "cursor-pointer" : "cursor-not-allowed"
-                }`}
+                className={`text-2xl transition-all duration-500 ${tagInput ? "cursor-pointer" : "cursor-not-allowed"
+                  }`}
                 color={tagInput ? "light" : "medium"}
                 onClick={() => {
                   if (!tagInput) return;

@@ -9,7 +9,6 @@ import {
   useIonRouter,
 } from "@ionic/react";
 import { arrowBack } from "ionicons/icons";
-import { nftListTemp } from "../home/utils";
 import NftList from "../../components/NFT/NftList";
 
 const Profile = () => {
@@ -32,7 +31,7 @@ const Profile = () => {
           </div>
           <div className="w-full px-3">
             <NftList
-              items={nftListTemp.slice(2)}
+              items={[]}
               onShowDetails={(nft) => router.push(`/edit-nft/${nft.id}`)}
             />
           </div>

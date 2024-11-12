@@ -22,10 +22,8 @@ import {
 } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import AnotherNFTModal from "../../components/NFT/AnotherNFTModal";
-import { NFT } from "../../types";
-import { nftListTemp } from "./utils";
+import { NFT, OrderDirection, OrderOptions } from "../../types";
 import NftList from "../../components/NFT/NftList";
-import { OrderDirection, OrderOptions } from "../../api/types";
 import { NftItem } from "../../api/nft/types";
 import { NftService } from "../../api/nft/nft.service";
 

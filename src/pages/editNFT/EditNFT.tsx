@@ -22,19 +22,9 @@ import { addCircle, arrowBack, trash } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import { NFT, SaleType } from "../../types";
-import { nftListTemp } from "../home/utils";
+import { options } from "../../utils/constans";
 
 type Props = RouteComponentProps<{ id: string }>;
-
-const options: { label: string; value: string }[] = [
-  "Arte",
-  "Música",
-  "Fotografía",
-  "Videojuegos",
-  "Deportes",
-  "Coleccionable",
-  "Otros",
-].map((category) => ({ label: category, value: category }));
 
 const EditNFT = ({ match }: Props) => {
   const router = useIonRouter();
@@ -54,7 +44,7 @@ const EditNFT = ({ match }: Props) => {
   };
 
   useEffect(() => {
-    setNft(nftListTemp.find((nft) => nft.id === match.params.id));
+    // fetchNft();
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
@@ -101,10 +91,10 @@ const EditNFT = ({ match }: Props) => {
                 value={nft?.saleType}
                 class="flex justify-around w-full items-center text-sm"
               >
-                <IonRadio value={SaleType.Fixed} color={"medium"}>
+                <IonRadio value={SaleType.fixed} color={"medium"}>
                   Venta
                 </IonRadio>
-                <IonRadio value={SaleType.Auction} color={"medium"}>
+                <IonRadio value={SaleType.auction} color={"medium"}>
                   Subasta
                 </IonRadio>
               </IonRadioGroup>

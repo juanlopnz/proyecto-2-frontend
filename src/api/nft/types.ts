@@ -1,7 +1,4 @@
-export enum SailType {
-  auction="Subasta",
-  fixed="Precio fijo"
-}
+import { SaleType } from "../../types";
 
 export type NftDTO = {
   id: string;
@@ -11,7 +8,7 @@ export type NftDTO = {
   price: number;
   category: string;
   tags: string[];
-  sailType: keyof typeof SailType;
+  saleType: keyof typeof SaleType;
   isSold: boolean;
   isDeleted: boolean;
   createdAt: string;
@@ -26,7 +23,18 @@ export type NftItem = {
   price: number;
   category: string;
   tags: string[];
-  sailType: SailType;
+  saleType: SaleType;
   isSold: boolean;
   isDeleted: boolean;
+}
+
+export type NewNft = {
+  creator: string;
+  name: string;
+  description: string | null;
+  image: string;
+  price: number;
+  category: string;
+  tags: string[];
+  saleType: keyof typeof SaleType;
 }

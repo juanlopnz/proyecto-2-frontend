@@ -14,7 +14,6 @@ import { arrowBack } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import { NFT } from "../../types";
-import { nftListTemp } from "../home/utils";
 
 type Props = RouteComponentProps<{ id: string }>;
 
@@ -48,7 +47,6 @@ const NftDetails = ({ match }: Props) => {
   }
 
   useEffect(() => {
-    setNft(nftListTemp.find((nft) => nft.id === match.params.id));
   }, []);
 
   return (
