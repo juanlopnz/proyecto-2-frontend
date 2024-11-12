@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import NftCard from "./NftCard";
-import { NFT } from "../../types";
+import { NftItem } from "../../api/nft/types";
 
 type Props = {
-  items: NFT[];
-  onShowDetails?: (nft: NFT) => void;
+  items: NftItem[];
+  onShowDetails?: (nft: NftItem) => void;
 };
 
 const NftList = ({ items, onShowDetails }: Props) => {

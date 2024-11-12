@@ -1,10 +1,11 @@
+import { NftItem } from "../../api/nft/types";
 import { NFT } from "../../types";
 
 type Props = {
-  nft: NFT;
+  nft: NftItem;
   onClick: () => void;
   showDetails: boolean;
-  onShowDetails?: (nft: NFT) => void;
+  onShowDetails?: (nft: NftItem) => void;
 };
 
 const NftCard = ({ nft, onClick, showDetails, onShowDetails }: Props) => {
