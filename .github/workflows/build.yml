@@ -40,7 +40,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           distribution: 'temurin'
-          java-version: '11' 
+          java-version: '17'  # Cambia a Java 17
 
       - name: Download Android SDK
         uses: android-actions/setup-android@v2
