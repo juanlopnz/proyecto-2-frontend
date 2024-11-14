@@ -1,5 +1,5 @@
 import { NFT, SaleType } from "../../types";
-import { NewNft, NftDTO, NftItem } from "./types";
+import { NewNft, NftDTO, NftItem, UpdateNft } from "./types";
 
 export const mapNft = (nft: NftDTO): NftItem => {
   return {
@@ -27,5 +27,15 @@ export const mapCreateNft = (nft: NFT): NewNft => {
     category: nft.category,
     tags: nft?.tags || [],
     saleType: nft.saleType,
+  }
+}
+
+export const mapUpdateNft = (nft: Partial<NFT>): UpdateNft => {
+  return {
+    id: nft.id!,
+    name: nft.name || "",
+    description: nft.description || "",
+    category: nft.category || "",
+    tags: nft?.tags || [],
   }
 }

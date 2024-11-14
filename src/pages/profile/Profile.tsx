@@ -5,14 +5,52 @@ import {
   IonHeader,
   IonIcon,
   IonPage,
+  IonSpinner,
   IonToolbar,
   useIonRouter,
 } from "@ionic/react";
 import { arrowBack } from "ionicons/icons";
 import NftList from "../../components/NFT/NftList";
+import { useContext, useEffect, useState } from "react";
+import { NftItem } from "../../api/nft/types";
+import { nftService } from "../../api/nft/nft.service";
+import { authContext } from "../../context/auth/AuthContext";
 
 const Profile = () => {
   const router = useIonRouter();
+  const [nftList, setNftList] = useState<NftItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const { wallet } = useContext(authContext)!;
+
+  useEffect(() => {
+    fetchNfts();
+  }, []);
+
+  const fetchNfts = async () => {
+    setIsLoading(true);
+
+    const walletAddress = wallet?.address;
+
+    if (!walletAddress) {
+      setIsLoading(false);
+      return;
+    }
+
+    nftService.getNftsByUser(walletAddress)
+      .then((data) => {
+        if (data) {
+          setNftList(data);
+        }
+        return;
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   return (
     <IonPage>
       <IonHeader>
@@ -30,10 +68,16 @@ const Profile = () => {
             Mis tokens
           </div>
           <div className="w-full px-3">
-            <NftList
-              items={[]}
-              onShowDetails={(nft) => router.push(`/edit-nft/${nft.id}`)}
-            />
+            {isLoading ? (
+              <div className="flex w-full items-center justify-center py-3">
+                <IonSpinner name="crescent" />
+              </div>
+            ) : (
+              <NftList
+                items={nftList}
+                onShowDetails={(nft) => router.push(`/edit-nft/${nft.id}`)}
+              />
+            )}
           </div>
         </div>
       </IonContent>

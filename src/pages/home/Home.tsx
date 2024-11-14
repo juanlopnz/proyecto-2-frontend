@@ -20,12 +20,13 @@ import {
   search,
   trashBinOutline,
 } from "ionicons/icons";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AnotherNFTModal from "../../components/NFT/AnotherNFTModal";
 import { NFT, OrderDirection, OrderOptions } from "../../types";
 import NftList from "../../components/NFT/NftList";
 import { NftItem } from "../../api/nft/types";
-import { NftService } from "../../api/nft/nft.service";
+import { nftService } from "../../api/nft/nft.service";
+import { authContext } from "../../context/auth/AuthContext";
 
 const options = [
   { value: "name", label: "Nombre" },
@@ -37,6 +38,8 @@ let timeoutId: any;
 
 const Home: React.FC = () => {
   const router = useIonRouter();
+
+  const auth = useContext(authContext)!;
 
   const [nftList, setNftList] = useState<NftItem[]>([]);
   const [searching, setSearching] = useState(false);
@@ -53,7 +56,7 @@ const Home: React.FC = () => {
 
   const fetchNfts = async () => {
     setIsLoading(true);
-    NftService.getNfts(searchText, selectedOrderField, selectedOrderDirection)
+    nftService.getNfts(auth.wallet?.address! ,searchText, selectedOrderField, selectedOrderDirection)
       .then((data) => {
         if (data) {
           setNftList(data);

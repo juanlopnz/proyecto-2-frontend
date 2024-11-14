@@ -13,7 +13,7 @@ import {
 import { arrowBack } from "ionicons/icons";
 import { useContext, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
-import { NftService } from "../../api/nft/nft.service";
+import { nftService } from "../../api/nft/nft.service";
 import { NftItem } from "../../api/nft/types";
 import { authContext } from "../../context/auth/AuthContext";
 import { NftContractManager } from "../../ethers/nft-contract";
@@ -60,7 +60,7 @@ const NftDetails = ({ match }: Props) => {
   };
 
   useEffect(() => {
-    NftService.getNft(match.params.id).then((data) => {
+    nftService.getNft(match.params.id).then((data) => {
       if (!data) {
         toast("No se encontró el NFT", 500);
         return router.goBack();

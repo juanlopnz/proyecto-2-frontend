@@ -40,3 +40,11 @@ export type NewNft = {
   tags: string[];
   saleType: keyof typeof SaleType;
 };
+
+export type UpdateNft = {
+  id: string;
+  name: string;
+  description: string | null;
+  category: string;
+  tags: string[];
+}

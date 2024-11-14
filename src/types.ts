@@ -4,6 +4,7 @@ export enum SaleType {
 }
 
 export type NFT = {
+  id?: string;
   name: string;
   category: string;
   description: string;

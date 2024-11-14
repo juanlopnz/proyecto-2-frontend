@@ -22,7 +22,7 @@ import { Fragment, useContext, useState } from "react";
 import { authContext } from "../../context/auth/AuthContext";
 import useImageMethods from "../../hooks/useImageMethods";
 import { NFT, SaleType } from "../../types";
-import { NftService } from "../../api/nft/nft.service";
+import { nftService } from "../../api/nft/nft.service";
 import { options } from "../../utils/constants";
 
 const CreateNFT = () => {
@@ -57,7 +57,7 @@ const CreateNFT = () => {
       return;
     }
 
-    NftService.createNft(nft)
+    nftService.createNft(nft)
       .then(() => {
         toast("NFT creado con éxito", 500);
         return router.push("/home");

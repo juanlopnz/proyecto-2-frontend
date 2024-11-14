@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import { NFT, SaleType } from "../../types";
 import { options } from "../../utils/constants";
+import { nftService } from "../../api/nft/nft.service";
 
 type Props = RouteComponentProps<{ id: string }>;
 
@@ -33,20 +34,52 @@ const EditNFT = ({ match }: Props) => {
   const [toast] = useIonToast();
   const [tagInput, setTagInput] = useState<string>("");
 
+  useEffect(() => {
+    fetchNft();
+  }, []);
+
+  const fetchNft = async () => {
+    setLoading(true);
+    nftService.getNft(match.params.id)
+      .then((data) => {
+        if (data) {
+          setNft(data);
+        }
+        return;
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const handleEdit = () => {
-    toast("Guardado", 500);
+    nftService.updateNft(nft!)
+      .then(() => {
+        toast("Guardado", 500);
+        return router.goBack();
+      })
+      .catch((error) => {
+        toast("Error al guardar", 500);
+        console.error(error);
+      });
     return router.goBack();
   };
 
   const handleDelete = () => {
-    toast("Eliminado", 500);
+    nftService.deleteNft(match.params.id)
+      .then(() => {
+        toast("Eliminado", 500);
+        return router.goBack();
+      })
+      .catch((error) => {
+        toast("Error al eliminar", 500);
+        console.error(error);
+      });
     return router.goBack();
   };
-
-  useEffect(() => {
-    // fetchNft();
-    setTimeout(() => setLoading(false), 1000);
-  }, []);
 
   return (
     <IonPage>
@@ -142,9 +175,8 @@ const EditNFT = ({ match }: Props) => {
                 />
                 <IonIcon
                   icon={addCircle}
-                  className={`text-2xl transition-all duration-500 ${
-                    tagInput ? "cursor-pointer" : "cursor-not-allowed"
-                  }`}
+                  className={`text-2xl transition-all duration-500 ${tagInput ? "cursor-pointer" : "cursor-not-allowed"
+                    }`}
                   color={tagInput ? "light" : "medium"}
                   onClick={() => {
                     if (!tagInput) return;

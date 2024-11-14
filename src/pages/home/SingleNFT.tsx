@@ -2,7 +2,7 @@ import { IonBackButton, IonButtons, IonCardContent, IonHeader, IonPage, IonTitle
 import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import { NftItem } from "../../api/nft/types";
-import { NftService } from "../../api/nft/nft.service";
+import { nftService } from "../../api/nft/nft.service";
 import { SaleType } from "../../types";
 
 interface Props extends RouteComponentProps<{ id: string }> { }
@@ -17,7 +17,7 @@ const SingleNFT: React.FC<Props> = ({ match }) => {
   }, [match.params.id]);
 
   const fetchNft = async () => {
-    NftService.getNft(match.params.id)
+    nftService.getNft(match.params.id)
       .then((data) => {
         setSelectedNFT(data);
       })
