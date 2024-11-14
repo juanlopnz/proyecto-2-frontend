@@ -4,6 +4,8 @@ import {
   IonFabButton,
   IonIcon,
   IonPage,
+  IonRefresher,
+  IonRefresherContent,
   IonSearchbar,
   IonSelect,
   IonSelectOption,
@@ -56,7 +58,7 @@ const Home: React.FC = () => {
 
   const fetchNfts = async () => {
     setIsLoading(true);
-    nftService.getNfts(auth.wallet?.address! ,searchText, selectedOrderField, selectedOrderDirection)
+    nftService.getNfts(auth.wallet?.address!, searchText, selectedOrderField, selectedOrderDirection)
       .then((data) => {
         if (data) {
           setNftList(data);
@@ -71,9 +73,17 @@ const Home: React.FC = () => {
       });
   };
 
+  const handleRefresh = (event: CustomEvent) => {
+    fetchNfts().then(() => event.detail.complete());
+  }
+
   return (
     <IonPage>
       <IonContent fullscreen>
+        <IonRefresher slot="fixed" onIonRefresh={handleRefresh}>
+          <IonRefresherContent />
+        </IonRefresher>
+
         <div className="flex flex-col w-full justify-center items-center">
           <div className="flex w-full items-center justify-center pt-10">
             <div
@@ -155,8 +165,8 @@ const Home: React.FC = () => {
           </div>
         </div>
         {isLoading ? (
-          <div className="flex w-full h-full items-center justify-center">
-            <IonSpinner />
+          <div className="flex w-full items-center justify-center py-3">
+            <IonSpinner name="crescent" />
           </div>
         ) : (
           <NftList items={nftList} onShowDetails={(nft) => router.push(`/details/${nft.id}`)} />
