@@ -1,6 +1,7 @@
 import { HDNodeWallet, Wallet } from "ethers";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { AuthContextType } from "./types";
+import { Preferences } from "@capacitor/preferences";
 
 export const authContext = createContext<AuthContextType | null>(null);
 
@@ -11,8 +12,16 @@ type Props = {
 export const AuthProvider = ({ children }: Props) => {
   const [wallet, setWallet] = useState<Wallet | HDNodeWallet>();
   const [walletFile, setWalletFile] = useState<string | undefined>(
-    localStorage.getItem("wallet") || undefined
+    // localStorage.getItem("wallet") || undefined
   );
+
+  useEffect(() => {
+    const loadWalletFile = async () => {
+      const { value } = await Preferences.get({ key: "wallet" })
+      setWalletFile(value || undefined);
+    }
+    loadWalletFile();
+  }, [])
 
   return (
     <authContext.Provider
@@ -20,9 +29,14 @@ export const AuthProvider = ({ children }: Props) => {
         wallet,
         setWallet,
         walletFile,
-        setWalletFile: (file: string) => {
-          localStorage.setItem("wallet", file);
-          setWalletFile(file);
+        setWalletFile: async (file: string) => {
+          // localStorage.setItem("wallet", file);
+          try {
+            await Preferences.set({ key: "wallet", value: file });
+            setWalletFile(file);
+          } catch (error) {
+            console.error(error);   
+          }
         },
       }}
     >
