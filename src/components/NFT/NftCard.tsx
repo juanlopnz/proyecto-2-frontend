@@ -29,7 +29,7 @@ const NftCard = ({ nft, onClick, showDetails, onShowDetails }: Props) => {
         <div className="font-extralight text-xl self-center py-5">Ver más</div>
         <div>{nft.name}</div>
         <div className="font-extralight text-xs">
-          ETH {nft.price.toLocaleString("es-CO")}
+          WEI {nft.price.toLocaleString("es-CO")}
         </div>
       </div>
     </div>

@@ -11,14 +11,18 @@ import {
   useIonToast,
 } from "@ionic/react";
 import { arrowBack } from "ionicons/icons";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
-import { NFT } from "../../types";
+import { NftService } from "../../api/nft/nft.service";
+import { NftItem } from "../../api/nft/types";
+import { authContext } from "../../context/auth/AuthContext";
+import { NftContractManager } from "../../ethers/nft-contract";
 
 type Props = RouteComponentProps<{ id: string }>;
 
 const NftDetails = ({ match }: Props) => {
-  const [nft, setNft] = useState<NFT>();
+  const auth = useContext(authContext);
+  const [nft, setNft] = useState<NftItem>();
   const router = useIonRouter();
   const [toast] = useIonToast();
 
@@ -37,16 +41,33 @@ const NftDetails = ({ match }: Props) => {
     },
     {
       label: "Tags",
-      value: nft?.tags.join(", "),
+      value: nft?.tags?.join(", ") || "No tags",
     },
   ];
 
   const buy = () => {
-    toast("Comprado", 500);
-    return router.goBack();
-  }
+    NftContractManager.getInstance(auth?.wallet!)
+      .buy(nft!.id, nft?.price!)
+      .then((txn) => {
+        console.log(txn);
+        toast("Comprado", 500);
+        return router.goBack();
+      })
+      .catch((error) => {
+        console.error(error);
+        toast("Error al realizar la compra", 500);
+      });
+  };
 
   useEffect(() => {
+    NftService.getNft(match.params.id).then((data) => {
+      if (!data) {
+        toast("No se encontró el NFT", 500);
+        return router.goBack();
+      }
+      console.log(data);
+      setNft(data);
+    });
   }, []);
 
   return (
@@ -77,15 +98,19 @@ const NftDetails = ({ match }: Props) => {
             <div className="flex flex-col items-center justify-center w-full">
               <p className="text-2xl text-center font-thin">{nft.name}</p>
               <p className="text-lg text-center font-thin">
-                ETH {nft.price.toLocaleString("es-CO")}
+                WEI {nft.price.toLocaleString("es-CO")}
               </p>
             </div>
             <p className="text-center py-2">Datos generales</p>
             <div className="flex flex-col w-full">
-              {data.flatMap((item) => {
+              {data.flatMap((item, index) => {
                 return [
-                  <p className="text-sm py-1 border-b">{item.label}</p>,
-                  <p className="text-sm font-thin py-2">{item.value}</p>,
+                  <p className="text-sm py-1 border-b" key={`${index}-1`}>
+                    {item.label}
+                  </p>,
+                  <p className="text-sm font-thin py-2" key={`${index}-2`}>
+                    {item.value}
+                  </p>,
                 ];
               })}
             </div>

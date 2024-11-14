@@ -20,9 +20,11 @@ const UnlockWallet = () => {
     if (auth?.walletFile) {
       wallet = await Wallet.fromEncryptedJson(auth.walletFile, password);
       auth?.setWallet(wallet);
+      return;
     }
     wallet = Wallet.createRandom();
     const encryptedWallet = await wallet.encrypt(password);
+    console.log(encryptedWallet)
     auth?.setWallet(wallet);
     auth?.setWalletFile(encryptedWallet);
   };

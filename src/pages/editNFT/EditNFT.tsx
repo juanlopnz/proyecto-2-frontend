@@ -22,7 +22,7 @@ import { addCircle, arrowBack, trash } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import { NFT, SaleType } from "../../types";
-import { options } from "../../utils/constans";
+import { options } from "../../utils/constants";
 
 type Props = RouteComponentProps<{ id: string }>;
 

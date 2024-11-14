@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
-import { AuthContextType } from "./types";
 import { HDNodeWallet, Wallet } from "ethers";
+import { createContext, useState } from "react";
+import { AuthContextType } from "./types";
 
 export const authContext = createContext<AuthContextType | null>(null);
 
@@ -20,7 +20,10 @@ export const AuthProvider = ({ children }: Props) => {
         wallet,
         setWallet,
         walletFile,
-        setWalletFile,
+        setWalletFile: (file: string) => {
+          localStorage.setItem("wallet", file);
+          setWalletFile(file);
+        },
       }}
     >
       {children}

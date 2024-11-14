@@ -23,7 +23,7 @@ import { authContext } from "../../context/auth/AuthContext";
 import useImageMethods from "../../hooks/useImageMethods";
 import { NFT, SaleType } from "../../types";
 import { NftService } from "../../api/nft/nft.service";
-import { options } from "../../utils/constans";
+import { options } from "../../utils/constants";
 
 const CreateNFT = () => {
   const auth = useContext(authContext);

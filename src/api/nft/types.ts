@@ -13,7 +13,8 @@ export type NftDTO = {
   isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
-}
+  creator: string;
+};
 
 export type NftItem = {
   id: string;
@@ -26,7 +27,8 @@ export type NftItem = {
   saleType: SaleType;
   isSold: boolean;
   isDeleted: boolean;
-}
+  owner: string;
+};
 
 export type NewNft = {
   creator: string;
@@ -37,4 +39,4 @@ export type NewNft = {
   category: string;
   tags: string[];
   saleType: keyof typeof SaleType;
-}
+};

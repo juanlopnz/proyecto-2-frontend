@@ -1,6 +1,6 @@
 import { BaseResponse, NFT, OrderDirection, OrderOptions } from "../../types";
 import { endpoints } from "../endpoints";
-import { mapCreateNft, mapNft, mapNftList } from "./mapper";
+import { mapCreateNft, mapNft } from "./mapper";
 import { NftDTO, NftItem } from "./types";
 
 export const NftService = {
@@ -36,7 +36,7 @@ export const NftService = {
         }
       );
       const { data } = await response.json() as BaseResponse<NftDTO[] | []>;
-      return mapNftList(data);
+      return data.map((nft) => mapNft(nft));
     } catch (error) {
       console.error(error);
     }
