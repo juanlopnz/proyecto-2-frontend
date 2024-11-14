@@ -3,7 +3,7 @@ name: Build Capacitor App
 on:
   push:
     branches:
-      - main  # Ejecuta el pipeline al hacer push a la rama principal
+      - main
   pull_request:
     branches:
       - main
@@ -48,6 +48,9 @@ jobs:
           api-level: 30
           build-tools: '30.0.3'
           target: 'android-30'
+
+      - name: Grant execute permissions for gradlew
+        run: chmod +x android/gradlew
 
       - name: Build Android app
         run: |
