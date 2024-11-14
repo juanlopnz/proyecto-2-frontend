@@ -20,7 +20,7 @@ export class NftContractManager {
     );
     signer.provider?.getBalance(wallet.address).then(console.log);
     this.customNFTContract = new ethers.Contract(
-      "0x3D1B6345277BF7923944777663505A54C57265d9",
+      "0x4d47BC5172822099F31640eAB2444322AB4f5b9f",
       CustomNFT.abi,
       signer
     );

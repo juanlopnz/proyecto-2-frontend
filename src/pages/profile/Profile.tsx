@@ -17,6 +17,7 @@ import { NftItem } from "../../api/nft/types";
 import { nftService } from "../../api/nft/nft.service";
 import { authContext } from "../../context/auth/AuthContext";
 import { Clipboard } from "@capacitor/clipboard";
+import { HDNodeWallet } from "ethers";
 
 const Profile = () => {
   const router = useIonRouter();
@@ -33,6 +34,10 @@ const Profile = () => {
     {
       label: "Clave privada",
       value: wallet?.privateKey,
+    },
+    {
+      label: "Frase de seguridad",
+      value: (wallet as HDNodeWallet)?.mnemonic?.phrase || "",
     }
   ];
 
