@@ -31,6 +31,7 @@ const CreateNFT = () => {
   const [toast] = useIonToast();
   const { selectedImage, openGallery } = useImageMethods();
   const [tagInput, setTagInput] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const [nftData, setNftData] = useState<NFT>({
     name: "",
@@ -45,15 +46,17 @@ const CreateNFT = () => {
   });
 
   const handleCreateNFT = async () => {
+    setLoading(true);
     const nft = { ...nftData, image: selectedImage! };
     if (
       !nft.name ||
       !nft.category ||
-      !nft.price ||
+      !(nft.price >= 0) ||
       !nft.image ||
       !nft.saleType
     ) {
       toast("Por favor, rellene todos los campos", 500);
+      setLoading(false);
       return;
     }
 
@@ -65,6 +68,9 @@ const CreateNFT = () => {
       .catch((error) => {
         console.error(error);
         toast("Error al crear el NFT", 500);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -207,6 +213,7 @@ const CreateNFT = () => {
             onClick={handleCreateNFT}
             className="text-sm capitalize"
             color={"dark"}
+            disabled={loading}
           >
             Crear NFT
           </IonButton>
