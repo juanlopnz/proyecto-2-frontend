@@ -1,4 +1,5 @@
-const URL_BASE = "http://localhost:3000"
+// const URL_BASE = "http://localhost:3000"
+const URL_BASE = "https://proyecto-2-backend.onrender.com"
 
 export const endpoints = {
   nft: {
