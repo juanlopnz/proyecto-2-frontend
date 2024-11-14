@@ -1,7 +1,7 @@
 import { IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonInput } from "@ionic/react";
 import Modal from "../Base/Modal";
 import { useState } from "react";
-import { NFT } from "../../types";
+import { NFT, SaleType } from "../../types";
 
 type Props = {
   isModalOpen: boolean;
@@ -42,7 +42,7 @@ const AnotherNFTModal = ({
           <p className="text-gray-500">Tipo de venta: {selectedNFT?.saleType}</p>
           <p className="text-lg font-semibold">Precio: ${selectedNFT?.price}</p>
 
-          {selectedNFT?.saleType === "Subasta" && (
+          {selectedNFT?.saleType === SaleType.auction && (
             <div className="flex flex-col gap-2 p-2 bg-gray-100 rounded-lg">
               <p className="text-lg font-semibold text-gray-700">Oferta actual: ${currentBid}</p>
               <input
